@@ -1,0 +1,431 @@
+/* ════════════════════════════════════════════════════════════════
+   WAYBAR STYLE  —  DARK HACKER EDITION  (fixed)
+   Arch + Hyprland  |  Nerd Fonts required
+   GTK CSS — only properties waybar actually supports
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Global reset (GTK-safe) ─────────────────────────────────────── */
+* {
+    font-family: "BigBlueTermPlus Nerd Font", "BigBlueTerm437 Nerd Font", monospace;
+    font-size: 12px;
+    font-weight: 500;
+    min-height: 0;
+    /* Do NOT set border/border-radius here — it breaks module specificity */
+}
+
+/* ── Bar Root ────────────────────────────────────────────────────── */
+window#waybar {
+    background-color: rgba(18, 10, 24, 0.95);
+    border-bottom: 1px solid rgba(88, 50, 114, 0.25);
+    color: #f8f8f2;
+}
+
+window#waybar.hidden {
+    opacity: 0.1;
+
+}
+
+/* ── Force equal-width sides so center is always truly middle ───── */
+.modules-left,
+.modules-right {
+    min-width: 0;
+}
+
+/* GTK packs left/right into equal halves when both are set to expand */
+.modules-left {
+    min-width: 350px;
+}
+
+/* ── Tooltip ─────────────────────────────────────────────────────── */
+tooltip {
+    background-color: rgba(5, 8, 12, 0.97);
+    border: 1px solid rgba(255, 255, 255, 0.40);
+    border-radius: 8px;
+    color: #f8f8f2;
+}
+
+tooltip label {
+    color: #f8f8f2;
+    padding: 4px 8px;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   LEFT — ARCH LOGO, WORKSPACES, WINDOW TITLE
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Arch Logo ───────────────────────────────────────────────────── */
+#custom-arch {
+    /* Outline/hollow look — very dim fill, vivid border */
+    color: rgba(23, 147, 209, 0.18);
+    background-color: transparent;
+    font-size: 22px;
+    padding: 0 14px;
+    margin: 4px 2px 4px 4px;
+    border-radius: 8px;
+    border: 2px solid rgba(11, 203, 241, 0.65);
+}
+
+#custom-arch:hover {
+    color: rgba(23, 147, 209, 0.45);
+    background-color: rgba(23, 147, 209, 0.08);
+    border-color: rgba(23, 147, 209, 0.95);
+}
+
+/* ── Workspaces ──────────────────────────────────────────────────── */
+#workspaces {
+    margin: 0px 2px;
+    background-color: rgba(15, 20, 28, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 0 4px;
+}
+
+#workspaces button {
+    padding: 0px 6px;
+    color: #4ade80;
+    font-size: 12px;
+    border-radius: 6px;
+    background-color: transparent;
+    border: none;
+}
+
+#workspaces button.empty {
+    color: rgba(248, 248, 242, 0.45);
+}
+
+#workspaces button:hover {
+    color: #f8f8f2;
+    background-color: rgba(255, 255, 255, 0.12);
+    border: none;
+}
+
+#workspaces button.active {
+    color: #f8f8f2;
+    background-color: rgba(255, 255, 255, 0.20);
+    border: 1px solid rgba(255, 255, 255, 0.50);
+}
+
+#workspaces button.urgent {
+    color: #f38ba8;
+    background-color: rgba(243, 139, 168, 0.15);
+    border: 1px solid rgba(243, 139, 168, 0.5);
+    animation: urgent-blink 1s linear infinite;
+}
+
+/* ── Custom Date Module ──────────────────────────────────────────── */
+#custom-date {
+    color: #f8f8f2;
+    margin: 4px 6px;
+    padding: 2px 8px;
+    font-size: 12px;
+    background-color: transparent;
+    border: none;
+}
+
+/* ── Focused workspace (Hyprland uses .focused not .active sometimes) */
+#workspaces button.focused {
+    color: #f8f8f2;
+    background-color: rgba(255, 255, 255, 0.20);
+    border: 1px solid rgba(255, 255, 255, 0.50);
+}
+
+/* ── Now Playing Indicator ───────────────────────────────────────── */
+#custom-playing {
+    color: #f8f8f2;
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    border-radius: 8px;
+    padding: 2px 12px;
+    margin: 4px 4px;
+    font-size: 12px;
+    animation: music-pulse 2.4s ease-in-out infinite;
+}
+
+#custom-playing:hover {
+    background-color: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    color: #f8f8f2;
+}
+
+@keyframes music-pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.55;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* ── Window Title ─────────────────────────────────────────────────────── */
+#window {
+    color: #f8f8f2;
+    margin: 4px 4px;
+    padding: 2px 10px;
+    font-size: 12px;
+    background-color: transparent;
+    border: none;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CENTER — CLOCK
+   ════════════════════════════════════════════════════════════════ */
+#clock {
+    color: #f8f8f2;
+    background-color: transparent;
+    border: none;
+    padding: 0px 8px;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+#clock:hover {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   RIGHT — BASE STYLE (applied to all right modules)
+   ════════════════════════════════════════════════════════════════ */
+#network,
+#bluetooth,
+#backlight,
+#pulseaudio,
+#temperature,
+#cpu,
+#memory,
+#battery,
+#custom-media,
+#custom-screenshot,
+#custom-power {
+    padding: 0px 6px;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    color: #f8f8f2;
+    background-color: transparent;
+}
+
+/* ── Shared hover (blue tint) ────────────────────────────────────── */
+#network:hover,
+#bluetooth:hover,
+#backlight:hover,
+#pulseaudio:hover,
+#temperature:hover,
+#cpu:hover,
+#memory:hover,
+#battery:hover,
+#custom-screenshot:hover {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   RIGHT — PER-MODULE COLOURS
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Network ─────────────────────────────────────────────────────── */
+#network {
+    color: #f8f8f2;
+}
+
+#network.disconnected {
+    color: #f38ba8;
+    background-color: rgba(243, 139, 168, 0.08);
+    border-color: rgba(243, 139, 168, 0.25);
+}
+
+#network.wifi {
+    color: #f8f8f2;
+}
+
+#network.ethernet {
+    color: #a6e3a1;
+}
+
+/* ── Bluetooth ───────────────────────────────────────────────────── */
+#bluetooth {
+    color: #f8f8f2;
+}
+
+#bluetooth.connected {
+    color: #f8f8f2;
+    background-color: transparent;
+    border: none;
+}
+
+#bluetooth.off,
+#bluetooth.disabled {
+    color: rgba(205, 214, 244, 0.3);
+}
+
+/* ── Backlight ───────────────────────────────────────────────────── */
+#backlight {
+    color: #f9e2af;
+}
+
+/* ── Audio ───────────────────────────────────────────────────────── */
+#pulseaudio {
+    color: #f8f8f2;
+}
+
+#pulseaudio.muted {
+    color: rgba(205, 214, 244, 0.3);
+    background-color: rgba(15, 20, 28, 0.4);
+    border-color: rgba(205, 214, 244, 0.1);
+}
+
+/* ── Temperature ─────────────────────────────────────────────────── */
+#temperature {
+    color: #a6e3a1;
+}
+
+#temperature.critical {
+    color: #f38ba8;
+    background-color: rgba(243, 139, 168, 0.12);
+    border-color: rgba(243, 139, 168, 0.4);
+    animation: critical-blink 1.5s linear infinite;
+}
+
+/* ── CPU ─────────────────────────────────────────────────────────── */
+#cpu {
+    color: #f8f8f2;
+}
+
+#cpu.warning {
+    color: #f9e2af;
+    background-color: rgba(249, 226, 175, 0.1);
+    border-color: rgba(249, 226, 175, 0.28);
+}
+
+#cpu.critical {
+    color: #f38ba8;
+    background-color: rgba(243, 139, 168, 0.12);
+    border-color: rgba(243, 139, 168, 0.4);
+    animation: critical-blink 1.5s linear infinite;
+}
+
+/* ── Memory ──────────────────────────────────────────────────────── */
+#memory {
+    color: #f8f8f2;
+}
+
+#memory.warning {
+    color: #f9e2af;
+    background-color: rgba(249, 226, 175, 0.1);
+    border-color: rgba(249, 226, 175, 0.28);
+}
+
+#memory.critical {
+    color: #f38ba8;
+    background-color: rgba(243, 139, 168, 0.12);
+    border-color: rgba(243, 139, 168, 0.4);
+    animation: critical-blink 1.5s linear infinite;
+}
+
+/* ── Battery ─────────────────────────────────────────────────────── */
+#battery {
+    color: #a6e3a1;
+}
+
+#battery.normal {
+    color: #f8f8f2;
+}
+
+#battery.charging {
+    color: #a6e3a1;
+    background-color: transparent;
+    border: none;
+}
+
+#battery.plugged {
+    color: #f8f8f2;
+}
+
+#battery.critical:not(.charging) {
+    color: #ff0000;
+    background-color: rgba(255, 0, 0, 0.12);
+    border-color: rgba(255, 0, 0, 0.4);
+    animation: critical-blink 1s linear infinite;
+}
+
+/* ── Media Player ────────────────────────────────────────────────── */
+#custom-media {
+    color: #f8f8f2;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 7px;
+    padding: 2px 10px;
+    margin: 4px 2px;
+}
+
+#custom-media:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    color: #f8f8f2;
+}
+
+/* ── Screenshot ──────────────────────────────────────────────────── */
+#custom-screenshot {
+    color: #f8f8f2;
+    font-size: 12px;
+    padding: 2px 12px;
+}
+
+/* ── Power button ────────────────────────────────────────────────── */
+#custom-power {
+    color: #f8f8f2;
+    background-color: transparent;
+    border: none;
+    font-size: 12px;
+    padding: 0px 8px;
+    margin: 0;
+}
+
+#custom-power:hover {
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+}
+
+/* ── Separator ───────────────────────────────────────────────────── */
+#custom-separator {
+    color: rgba(248, 248, 242, 0.28);
+    font-size: 12px;
+    padding: 0 2px;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ANIMATIONS  (opacity-only — GTK-safe)
+   ════════════════════════════════════════════════════════════════ */
+@keyframes urgent-blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.45;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes critical-blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.55;
+    }
+    100% {
+        opacity: 1;
+    }
+}

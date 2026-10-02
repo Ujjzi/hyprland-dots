@@ -1,0 +1,380 @@
+/* ════════════════════════════════════════════════════════════════
+   WAYBAR STYLE  —  DARK HACKER EDITION  (fixed)
+   Arch + Hyprland  |  Nerd Fonts required
+   GTK CSS — only properties waybar actually supports
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Global reset (GTK-safe) ─────────────────────────────────────── */
+* {
+    font-family: "JetBrainsMono Nerd Font", "CaskaydiaCove Nerd Font",
+                 "FiraCode Nerd Font", "Font Awesome 6 Free", monospace;
+    font-size: 13px;
+    font-weight: 500;
+    min-height: 0;
+    /* Do NOT set border/border-radius here — it breaks module specificity */
+}
+
+/* ── Bar Root ────────────────────────────────────────────────────── */
+window#waybar {
+    background-color: rgba(12, 8, 5, 0.92);
+    border-bottom: 1px solid rgba(0, 247, 255, 0.15);
+    color: #cdd6f4;
+}
+
+window#waybar.hidden {
+    opacity: 0.1;
+
+}
+
+/* ── Force equal-width sides so center is always truly middle ───── */
+.modules-left,
+.modules-right {
+    min-width: 0;
+}
+
+/* GTK packs left/right into equal halves when both are set to expand */
+.modules-left {
+    min-width: 350px;
+}
+
+/* ── Tooltip ─────────────────────────────────────────────────────── */
+tooltip {
+    background-color: rgba(5, 8, 12, 0.97);
+    border: 1px solid rgba(0, 255, 136, 0.4);
+    border-radius: 8px;
+    color: #cdd6f4;
+}
+
+tooltip label {
+    color: #cdd6f4;
+    padding: 4px 8px;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   LEFT — ARCH LOGO, WORKSPACES, WINDOW TITLE
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Arch Logo ───────────────────────────────────────────────────── */
+#custom-arch {
+    /* Outline/hollow look — very dim fill, vivid border */
+    color: rgba(23, 147, 209, 0.18);
+    background-color: transparent;
+    font-size: 22px;
+    padding: 0 14px;
+    margin: 4px 2px 4px 4px;
+    border-radius: 8px;
+    border: 2px solid rgba(11, 203, 241, 0.65);
+}
+
+#custom-arch:hover {
+    color: rgba(23, 147, 209, 0.45);
+    background-color: rgba(23, 147, 209, 0.08);
+    border-color: rgba(23, 147, 209, 0.95);
+}
+
+/* ── Workspaces ──────────────────────────────────────────────────── */
+#workspaces {
+    margin: 4px 4px;
+    background-color: rgba(15, 20, 28, 0.7);
+    border: 1px solid rgba(0, 255, 136, 0.1);
+    border-radius: 8px;
+    padding: 0 4px;
+}
+
+#workspaces button {
+    padding: 2px 10px;
+    color: rgba(205, 214, 244, 0.45);
+    font-size: 15px;
+    border-radius: 6px;
+    background-color: transparent;
+    border: none;
+}
+
+#workspaces button:hover {
+    color: #00ff88;
+    background-color: rgba(0, 255, 136, 0.1);
+    border: none;
+}
+
+#workspaces button.active {
+    color: #00ff88;
+    background-color: rgba(0, 255, 136, 0.18);
+    border: 1px solid rgba(0, 255, 136, 0.45);
+}
+
+#workspaces button.urgent {
+    color: #f38ba8;
+    background-color: rgba(243, 139, 168, 0.15);
+    border: 1px solid rgba(243, 139, 168, 0.5);
+    animation: urgent-blink 1s linear infinite;
+}
+
+/* ── Focused workspace (Hyprland uses .focused not .active sometimes) */
+#workspaces button.focused {
+    color: #00ff88;
+    background-color: rgba(0, 255, 136, 0.18);
+    border: 1px solid rgba(0, 255, 136, 0.45);
+}
+
+/* ── Window Title ────────────────────────────────────────────────── */
+#window {
+    color: rgba(205, 214, 244, 0.7);
+    margin: 4px 6px;
+    padding: 0 10px;
+    font-size: 12px;
+    background-color: transparent;
+    border: none;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CENTER — CLOCK
+   ════════════════════════════════════════════════════════════════ */
+#clock {
+    color: #00ff88;
+    background-color: rgba(0, 255, 136, 0.08);
+    border: 1px solid rgba(0, 255, 136, 0.22);
+    border-radius: 8px;
+    padding: 2px 18px;
+    margin: 4px 0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+#clock:hover {
+    background-color: rgba(0, 255, 136, 0.16);
+    border-color: rgba(0, 255, 136, 0.5);
+    color: #33ffaa;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   RIGHT — BASE STYLE (applied to all right modules)
+   ════════════════════════════════════════════════════════════════ */
+#network,
+#bluetooth,
+#backlight,
+#pulseaudio,
+#temperature,
+#cpu,
+#memory,
+#battery,
+#custom-media,
+#custom-screenshot,
+#custom-power {
+    padding: 2px 10px;
+    margin: 4px 2px;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    color: #cdd6f4;
+    background-color: rgba(15, 20, 28, 0.6);
+}
+
+/* ── Shared hover (cyan tint) ────────────────────────────────────── */
+#network:hover,
+#bluetooth:hover,
+#backlight:hover,
+#pulseaudio:hover,
+#temperature:hover,
+#cpu:hover,
+#memory:hover,
+#battery:hover,
+#custom-screenshot:hover {
+    background-color: rgba(0, 200, 255, 0.12);
+    border-color: rgba(0, 200, 255, 0.38);
+    color: #00c8ff;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   RIGHT — PER-MODULE COLOURS
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Network ─────────────────────────────────────────────────────── */
+#network {
+    color: #89dceb;
+}
+
+#network.disconnected {
+    color: #f38ba8;
+    background-color: rgba(243, 139, 168, 0.08);
+    border-color: rgba(243, 139, 168, 0.25);
+}
+
+#network.wifi {
+    color: #89dceb;
+}
+
+#network.ethernet {
+    color: #a6e3a1;
+}
+
+/* ── Bluetooth ───────────────────────────────────────────────────── */
+#bluetooth {
+    color: #89b4fa;
+}
+
+#bluetooth.connected {
+    color: #89b4fa;
+    background-color: rgba(137, 180, 250, 0.1);
+    border-color: rgba(137, 180, 250, 0.3);
+}
+
+#bluetooth.off,
+#bluetooth.disabled {
+    color: rgba(205, 214, 244, 0.3);
+}
+
+/* ── Backlight ───────────────────────────────────────────────────── */
+#backlight {
+    color: #f9e2af;
+}
+
+/* ── Audio ───────────────────────────────────────────────────────── */
+#pulseaudio {
+    color: #cba6f7;
+}
+
+#pulseaudio.muted {
+    color: rgba(205, 214, 244, 0.3);
+    background-color: rgba(15, 20, 28, 0.4);
+    border-color: rgba(205, 214, 244, 0.1);
+}
+
+/* ── Temperature ─────────────────────────────────────────────────── */
+#temperature {
+    color: #a6e3a1;
+}
+
+#temperature.critical {
+    color: #f38ba8;
+    background-color: rgba(243, 139, 168, 0.12);
+    border-color: rgba(243, 139, 168, 0.4);
+    animation: critical-blink 1.5s linear infinite;
+}
+
+/* ── CPU ─────────────────────────────────────────────────────────── */
+#cpu {
+    color: #89dceb;
+}
+
+#cpu.warning {
+    color: #f9e2af;
+    background-color: rgba(249, 226, 175, 0.1);
+    border-color: rgba(249, 226, 175, 0.28);
+}
+
+#cpu.critical {
+    color: #f38ba8;
+    background-color: rgba(243, 139, 168, 0.12);
+    border-color: rgba(243, 139, 168, 0.4);
+    animation: critical-blink 1.5s linear infinite;
+}
+
+/* ── Memory ──────────────────────────────────────────────────────── */
+#memory {
+    color: #cba6f7;
+}
+
+#memory.warning {
+    color: #f9e2af;
+    background-color: rgba(249, 226, 175, 0.1);
+    border-color: rgba(249, 226, 175, 0.28);
+}
+
+#memory.critical {
+    color: #f38ba8;
+    background-color: rgba(243, 139, 168, 0.12);
+    border-color: rgba(243, 139, 168, 0.4);
+    animation: critical-blink 1.5s linear infinite;
+}
+
+/* ── Battery ─────────────────────────────────────────────────────── */
+#battery {
+    color: #a6e3a1;
+}
+
+#battery.charging {
+    color: #a6e3a1;
+    background-color: rgba(166, 227, 161, 0.1);
+    border-color: rgba(166, 227, 161, 0.25);
+}
+
+#battery.plugged {
+    color: #a6e3a1;
+}
+
+#battery.warning:not(.charging) {
+    color: #f9e2af;
+    background-color: rgba(249, 226, 175, 0.1);
+    border-color: rgba(249, 226, 175, 0.3);
+}
+
+#battery.critical:not(.charging) {
+    color: #f38ba8;
+    background-color: rgba(243, 139, 168, 0.12);
+    border-color: rgba(243, 139, 168, 0.4);
+    animation: critical-blink 1s linear infinite;
+}
+
+/* ── Media Player ────────────────────────────────────────────────── */
+#custom-media {
+    color: #cba6f7;
+    background-color: rgba(203, 166, 247, 0.08);
+    border: 1px solid rgba(203, 166, 247, 0.15);
+    border-radius: 7px;
+    padding: 2px 10px;
+    margin: 4px 2px;
+}
+
+#custom-media:hover {
+    background-color: rgba(203, 166, 247, 0.18);
+    border-color: rgba(203, 166, 247, 0.45);
+    color: #d8b4fe;
+}
+
+/* ── Screenshot ──────────────────────────────────────────────────── */
+#custom-screenshot {
+    color: #89dceb;
+    font-size: 14px;
+    padding: 2px 12px;
+}
+
+/* ── Power button ────────────────────────────────────────────────── */
+#custom-power {
+    color: #f38ba8;
+    background-color: rgba(243, 139, 168, 0.1);
+    border: 1px solid rgba(243, 139, 168, 0.28);
+    border-radius: 7px;
+    font-size: 15px;
+    padding: 2px 12px;
+    margin: 4px 4px 4px 2px;
+}
+
+#custom-power:hover {
+    background-color: rgba(243, 139, 168, 0.28);
+    border-color: rgba(243, 139, 168, 0.65);
+    color: #ff6b8a;
+}
+
+/* ── Separator ───────────────────────────────────────────────────── */
+#custom-separator {
+    color: rgba(0, 255, 136, 0.22);
+    font-size: 14px;
+    padding: 0 2px;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ANIMATIONS  (opacity-only — GTK-safe)
+   ════════════════════════════════════════════════════════════════ */
+@keyframes urgent-blink {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.45; }
+    100% { opacity: 1; }
+}
+
+@keyframes critical-blink {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.55; }
+    100% { opacity: 1; }
+}
